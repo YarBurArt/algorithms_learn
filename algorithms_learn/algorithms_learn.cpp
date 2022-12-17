@@ -6,6 +6,7 @@
 #include <time.h>
 #include <cmath>
 
+#define M_PI 3.14159265358979323846
 #define _USE_MATH_DEFINES
 #define repeat(n) for (int i=0; i<n; i++) 
 
@@ -15,12 +16,14 @@ void cycles(vector<int>); //указатель на функцию, чтобы �
 int random_range(int, int);
 vector<int> mySortPointers(vector<int>, int);
 int searchBrute(vector<int>, int);
+float circleS(float r);
 
 int main()
 {
 	cout << "Hello World!\n";
 
-	vector<int> num_vect = { 12,3,32,43, 3468, 34 };
+	vector<int> num_vect = { 12,3,32,43,3468,34 }; //dinamic array
+	int types_num[5] = { 2,1,5,3,7 }; //const array
 	//sort(num_vect.begin(), num_vect.end()); //от стандартных библиотек
 	mySortPointers(num_vect, num_vect.size()); //сортировка вставками
 	cycles(num_vect);
@@ -45,9 +48,9 @@ int main()
 	cout << "exp num: " << ex_rd << endl;
 
 	unsigned char smile = -255; // = 256 -|n/256| == :)
-	cout << "unsigned num: " << smile;
+	cout << "unsigned num: " << smile << endl;
 
-
+	cout << "S circle: " << circleS(rd) << endl;
 }
 
 int random_range(int min, int max) {
@@ -93,3 +96,7 @@ int searchBrute(vector<int> vect, int sn) {
 	}
 }
 
+float circleS(float r) {
+	const float pi = 3.14; //M_PI
+	return pi * r * r;
+}
