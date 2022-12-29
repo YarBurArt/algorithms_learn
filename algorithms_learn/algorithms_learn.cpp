@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <cmath>
+#include <conio.h>
 
 #define M_PI 3.14159265358979323846
 #define _USE_MATH_DEFINES
@@ -17,22 +18,31 @@ int random_range(int, int);
 vector<int> mySortPointers(vector<int>, int);
 int searchBrute(vector<int>, int);
 float circleS(float r);
+int bi_search(vector<int> data, int elem);
+vector<float> sigmoid(vector <float> m1);
+void bayan_bayanuch(int cnt, int ind, int k, char init[6]);
 
 int main()
 {
-	cout << "Hello World!\n";
+	setlocale(0, "");
 
-	vector<int> num_vect = { 12,3,32,43,3468,34 }; //dinamic array
+	cout << "Hello World!\n";
+	cout << "привет мир";
+
+	vector<int> num_vect = { 12,3,32,43,3468,34, }; //dinamic array
 	int types_num[5] = { 2,1,5,3,7 }; //const array
 	//sort(num_vect.begin(), num_vect.end()); //от стандартных библиотек
 	mySortPointers(num_vect, num_vect.size()); //сортировка вставками
 	cycles(num_vect);
 
 	cout << "num search: " << searchBrute(num_vect, 43) << endl; //поиск перебором
+
 	if (find(num_vect.begin(), num_vect.end(), 34) != num_vect.end()) {
 		cout << "num search: " << true;
-	} else { cout << "null"; }
+	}
+	else { cout << "null"; } cout << endl;
 	
+	cout << "num search: " << bi_search(num_vect, 3) << endl; //бинарный поиск 
 
 	string name = "jkygjkgf";
 	sort(name.begin(), name.end());
@@ -51,12 +61,23 @@ int main()
 	cout << "unsigned num: " << smile << endl;
 
 	cout << "S circle: " << circleS(rd) << endl;
+
+	vector<float> tosigm = {0.5,0.1,0.3};
+	cout << "sigmoid:";
+	vector<float> outsigm = sigmoid(tosigm);
+	repeat(outsigm.size()) {
+		cout << outsigm[i] << " ";
+	} cout << endl;
+
+	char chek[6] = { '(','(','(',')',')',')' };
+	bayan_bayanuch(0, 0, 6, chek);
 }
 
 int random_range(int min, int max) {
 	srand(time(NULL)); // усиление псевдорандома
 	int num = min + rand() % (max - min + 1);
-	return num;
+	return num;  
+
 }
 
 // пока i меньше размера вектора
@@ -87,16 +108,60 @@ vector<int> mySortPointers(vector<int> vect, int n) {
 
 int searchBrute(vector<int> vect, int sn) {
 	repeat(vect.size()) {
-		if (vect[i] == sn) {
-			return i;
-		}
-		else {
-			return 0;
-		}
+		if (vect[i] == sn) return i;
+		else return 0;
 	}
 }
 
 float circleS(float r) {
 	const float pi = 3.14; //M_PI
 	return pi * r * r;
+}
+
+int bi_search(vector<int> data_o, int elem) {
+	vector<int> data = mySortPointers(data_o, data_o.size());
+
+	repeat(data.size()) cout << data[i] << " ";
+	cout << endl;
+
+	int low = 0;
+	int high = data.size() - 1;
+	
+	while (low<=high) {
+		float sum = low + high;
+		int middle = (int)sum;
+	
+		if (data[middle] == elem) return middle;
+		else if (data[middle] > elem) high = middle - 1;
+		else low = middle + 1;
+	}
+	return -1;
+}
+
+vector<float> sigmoid(vector <float> m1) {
+	// f(x) = 1/(1 + e^-x).
+	vector <float> output(m1.size());
+	for (unsigned i = 0; i != m1.size(); ++i) {
+		output[i] = 1 / (1 + exp(-m1[i]));
+	}
+	return output;
+}
+
+void bayan_bayanuch(int cnt, int ind, int k, char init[6]) { 
+	// ((())) to ()()() = генерация правильных скобочных последовательностей со скобками одного вида
+	// k - размер списка и количество скобок, cnt - разница между скобками, ind - индекс для скобки 
+	// кладем (, только если хватает места
+	if (cnt <= k - ind - 2) {
+		init[ind] = '(';
+		// идем к следующей скобке
+		bayan_bayanuch(cnt + 1, ind + 1, k, init);
+	}
+	// ) можно положить всегда, если cnt > 0
+	if (cnt > 0) {
+		init[ind] = ')';
+		// идем к следующей скобке
+		bayan_bayanuch(cnt - 1, ind + 1, k, init);
+	}
+	// печать по окончанию итерации
+	if (ind == k && cnt == 0) cout << init;
 }
