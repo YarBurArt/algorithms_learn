@@ -69,8 +69,9 @@ int main()
 		cout << outsigm[i] << " ";
 	} cout << endl;
 
-	char chek[6] = { '(','(','(',')',')',')' };
-	bayan_bayanuch(0, 0, 6, chek);
+	//char chek[6] = { '(','(','(',')',')',')' };
+	//bayan_bayanuch(0, 0, 6, chek);
+	return 0;
 }
 
 int random_range(int min, int max) {
@@ -145,6 +146,29 @@ vector<float> sigmoid(vector <float> m1) {
 		output[i] = 1 / (1 + exp(-m1[i]));
 	}
 	return output;
+}
+
+vector<float> convertTemp(float celsius) {
+	vector<float> result(2);
+	result[0] = celsius + 273.15;   // kelvin
+	result[1] = celsius * 1.8 + 32; // fahrenheit
+	return result;
+}
+
+int finalValueAfterOperations(vector<string> operations) {
+	int x = 0;
+	for(string i:operations) {
+		if (i == "X++" or i == "++X") x++;
+		else x--;
+	}
+	return x;
+}
+
+int numIdenticalPairs(vector<int> nums, int count = 0) {
+	for (int i = 0; i < nums.size(); i++) 
+		for (int j = i++; j < nums.size(); j++)
+			if (nums[i]==nums[j]) count++;
+	return count;
 }
 
 void bayan_bayanuch(int cnt, int ind, int k, char init[6]) { 
