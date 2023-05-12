@@ -82,20 +82,20 @@ int random_range(int min, int max) {
 
 // пока i меньше размера вектора
 void cycles(vector<int> vect) {
-	cout << "\n";
-	for (int i = 0; i < vect.size(); i++) {
+	cout << endl;
+	for (int i = 0; i < vect.size(); i++) 
 		cout << vect[i] << " ";
-	}
-	cout << "\n"; //or
+	
+	cout << endl; //or
 	repeat(vect.size()) { //работает только с переименованием define выше
 		cout << vect[i] << " ";
 	}
-	cout << "\n"; //or
+	cout << endl; //or
 	int i = 0;
 	while (i < vect.size()) 
 		cout << vect[i++] << " ";
 	
-	cout << "\n"; 
+	cout << endl; 
 }
 
 vector<int> mySortPointers(vector<int> vect, int n) {
@@ -104,19 +104,19 @@ vector<int> mySortPointers(vector<int> vect, int n) {
 			swap(vect[j - 1], vect[j]);        // меняем местами элементы j (отсортированная часть с начала) и j-1 (следующий элемент)
 	return vect;
 }
-
+// простейший поиск перебором 
 int searchBrute(vector<int> vect, int sn) {
 	repeat(vect.size()) {
 		if (vect[i] == sn) return i;
 		else return 0;
 	}
 }
-
+// площадь круга 
 float circleS(float r) {
 	const float pi = 3.14; //M_PI
 	return pi * r * r;
 }
-
+// бинарный поиск
 int bi_search(vector<int> data_o, int elem) {
 	vector<int> data = mySortPointers(data_o, data_o.size());
 
@@ -136,7 +136,7 @@ int bi_search(vector<int> data_o, int elem) {
 	}
 	return -1;
 }
-
+// функция сигмоиды 
 vector<float> sigmoid(vector <float> m1) {
 	// f(x) = 1/(1 + e^-x).
 	vector <float> output(m1.size());
@@ -153,6 +153,7 @@ vector<float> convertTemp(float celsius) {
 	return result;
 }
 
+// from leetcode
 int finalValueAfterOperations(vector<string> operations) {
 	int x = 0;
 	for(string i:operations) {
@@ -161,7 +162,7 @@ int finalValueAfterOperations(vector<string> operations) {
 	}
 	return x;
 }
-
+// []
 int numIdenticalPairs(vector<int> nums, int count = 0) {
 	for (int i = 0; i < nums.size(); i++) 
 		for (int j = i++; j < nums.size(); j++)
