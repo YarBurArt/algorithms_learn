@@ -1,4 +1,4 @@
-﻿#include <vector>
+#include <vector>
 #include <algorithm>
 #include <array>
 #include <iostream>
@@ -26,8 +26,7 @@ int main()
 {
 	setlocale(0, "");
 
-	cout << "Hello World!\n";
-	cout << "привет мир";
+	cout << "Hello World!\n" << "привет мир";
 
 	vector<int> num_vect = { 12,3,32,43,3468,34, }; //dinamic array
 	int types_num[5] = { 2,1,5,3,7 }; //const array
@@ -93,10 +92,9 @@ void cycles(vector<int> vect) {
 	}
 	cout << "\n"; //or
 	int i = 0;
-	while (i < vect.size()) {
-		cout << vect[i] << " ";
-		i++;
-	}
+	while (i < vect.size()) 
+		cout << vect[i++] << " ";
+	
 	cout << "\n"; 
 }
 
@@ -142,9 +140,9 @@ int bi_search(vector<int> data_o, int elem) {
 vector<float> sigmoid(vector <float> m1) {
 	// f(x) = 1/(1 + e^-x).
 	vector <float> output(m1.size());
-	for (unsigned i = 0; i != m1.size(); ++i) {
+	for (unsigned i = 0; i != m1.size(); ++i) 
 		output[i] = 1 / (1 + exp(-m1[i]));
-	}
+	
 	return output;
 }
 
