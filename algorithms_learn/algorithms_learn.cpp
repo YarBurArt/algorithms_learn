@@ -7,11 +7,12 @@
 #include <cmath>
 #include <conio.h>
 
-#define M_PI 3.14159265358979323846
+constexpr double M_PI = 3.14159265358979323846;
 #define _USE_MATH_DEFINES
 #define repeat(n) for (int i=0; i<n; i++) 
 
-using namespace std;
+using std::vector, std::cout, std::endl, std::sort, std::find, std::string, std::swap;
+//using namespace std;
 
 void cycles(vector<int>); //указатель на функцию, чтобы их можно было писать ниже призыва
 int random_range(int, int);
@@ -25,6 +26,7 @@ void bayan_bayanuch(int cnt, int ind, int k, char init[6]);
 int main()
 {
 	setlocale(0, "");
+	srand(time(NULL)); // усиление псевдорандома
 
 	cout << "Hello World!\n" << "привет мир";
 
@@ -74,11 +76,14 @@ int main()
 }
 
 int random_range(int min, int max) {
-	srand(time(NULL)); // усиление псевдорандома
-	int num = min + rand() % (max - min + 1);
-	return num;  
-
+	static bool initialized = false;
+	if (!initialized) {
+		srand(static_cast<unsigned int>(time(nullptr)));
+		initialized = true;
+	}
+	return min + rand() % (max - min + 1);
 }
+
 
 // пока i меньше размера вектора
 void cycles(vector<int> vect) {
@@ -108,7 +113,7 @@ vector<int> mySortPointers(vector<int> vect, int n) {
 int searchBrute(vector<int> vect, int sn) {
 	repeat(vect.size()) {
 		if (vect[i] == sn) return i;
-		else return 0;
+		else return -1;
 	}
 }
 // площадь круга 
@@ -127,8 +132,7 @@ int bi_search(vector<int> data_o, int elem) {
 	int high = data.size() - 1;
 	
 	while (low<=high) {
-		float sum = low + high;
-		int middle = (int)sum;
+		int middle = (int)(low + (high - low) / 2);
 	
 		if (data[middle] == elem) return middle;
 		else if (data[middle] > elem) high = middle - 1;
@@ -165,7 +169,7 @@ int finalValueAfterOperations(vector<string> operations) {
 // []
 int numIdenticalPairs(vector<int> nums, int count = 0) {
 	for (int i = 0; i < nums.size(); i++) 
-		for (int j = i++; j < nums.size(); j++)
+		for (int j = i + 1; j < nums.size(); j++)
 			if (nums[i]==nums[j]) count++;
 	return count;
 }
