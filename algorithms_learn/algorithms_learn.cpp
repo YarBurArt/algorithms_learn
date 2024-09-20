@@ -76,6 +76,9 @@ int main()
 }
 
 int random_range(int min, int max) {
+	if (min > max) {
+		std::cerr << "Error: Min should be less than or equal to Max." << std::endl; return -1;
+	}
 	static bool initialized = false;
 	if (!initialized) {
 		srand(static_cast<unsigned int>(time(nullptr)));
@@ -87,6 +90,9 @@ int random_range(int min, int max) {
 
 // пока i меньше размера вектора
 void cycles(vector<int> vect) {
+	if (vect.empty()) {
+		std::cerr << "Error: The vector is empty." << std::endl;return;
+	}
 	cout << endl;
 	for (int i = 0; i < vect.size(); i++) 
 		cout << vect[i] << " ";
@@ -104,6 +110,9 @@ void cycles(vector<int> vect) {
 }
 
 vector<int> mySortPointers(vector<int> vect, int n) {
+	if (vect.empty()) {
+		std::cerr << "Error: The vector is empty." << std::endl; return vect;
+	}
 	for (int i = 1; i < n; i++) // проход по всему вектору
 		for (int j = i; j > 0 && vect[j-1] > vect[j]; j--) // пока j>0 и элемент j-1 > j, x это массив int
 			swap(vect[j - 1], vect[j]);        // меняем местами элементы j (отсортированная часть с начала) и j-1 (следующий элемент)
@@ -111,6 +120,9 @@ vector<int> mySortPointers(vector<int> vect, int n) {
 }
 // простейший поиск перебором 
 int searchBrute(vector<int> vect, int sn) {
+	if (vect.empty()) {
+		std::cerr << "Error: The vector is empty." << std::endl; return -1;
+	}
 	repeat(vect.size()) {
 		if (vect[i] == sn) return i;
 		else return -1;
@@ -123,6 +135,9 @@ float circleS(float r) {
 }
 // бинарный поиск
 int bi_search(vector<int> data_o, int elem) {
+	if (data_o.empty()) {
+		std::cerr << "Error: The vector is empty." << std::endl; return -1;
+	}
 	vector<int> data = mySortPointers(data_o, data_o.size());
 
 	repeat(data.size()) cout << data[i] << " ";
@@ -168,6 +183,9 @@ int finalValueAfterOperations(vector<string> operations) {
 }
 // []
 int numIdenticalPairs(vector<int> nums, int count = 0) {
+	if (nums.empty()) {
+		std::cerr << "Error: The vector is empty." << std::endl; return -1;
+	}
 	for (int i = 0; i < nums.size(); i++) 
 		for (int j = i + 1; j < nums.size(); j++)
 			if (nums[i]==nums[j]) count++;
